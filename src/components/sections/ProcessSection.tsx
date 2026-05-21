@@ -69,8 +69,8 @@ const DEMO_FEATURES = [
 
 export default function ProcessSection() {
   return (
-    <section id="process" style={{ padding: "60px 0" }}>
-      <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 24px" }}>
+    <section id="process" className="site-section">
+      <div className="site-container">
         <div
           style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 24 }}
           className="reveal start-grid"
@@ -92,7 +92,7 @@ export default function ProcessSection() {
                 Без обязательств. Если останутся вопросы — созвонимся ещё раз.
               </p>
             </div>
-            <CtaButtons size="lg" showContact />
+            <CtaButtons size="lg" showContact stack />
           </div>
 
           {/* ── Right: feature cards with SVG icons ── */}

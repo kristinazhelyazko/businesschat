@@ -25,30 +25,31 @@ export default function Navbar() {
         borderBottom: "1px solid rgba(255,255,255,0.07)",
       } : {}),
     }}>
-      <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 24px", height: 60, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-        {/* Logo */}
-        <Link href="/" style={{ display: "flex", alignItems: "center", gap: 10, textDecoration: "none" }}>
-          <div style={{ width: 32, height: 32, background: "linear-gradient(135deg,#39FF8C,#00E5FF)", borderRadius: 8, display: "flex", alignItems: "center", justifyContent: "center", boxShadow: "0 0 16px rgba(57,255,140,.2)" }}>
+      <div
+        className="site-container nav-bar-inner"
+        style={{ height: 60, display: "flex", alignItems: "center", gap: 12 }}
+      >
+        <Link href="/" className="nav-logo-block" style={{ display: "flex", alignItems: "center", gap: 10, textDecoration: "none", flexShrink: 0 }}>
+          <div style={{ width: 32, height: 32, background: "linear-gradient(135deg,#39FF8C,#00E5FF)", borderRadius: 8, display: "flex", alignItems: "center", justifyContent: "center", boxShadow: "0 0 16px rgba(57,255,140,.2)", flexShrink: 0 }}>
             <IconLogo size={16} />
           </div>
-          <span style={{ fontSize: 15, fontWeight: 700, color: "var(--white)", letterSpacing: "-.3px" }}>{SITE_CONFIG.name}</span>
+          <span className="nav-logo-text" style={{ fontSize: 15, fontWeight: 700, color: "var(--white)", letterSpacing: "-.3px", whiteSpace: "nowrap" }}>{SITE_CONFIG.name}</span>
         </Link>
 
-        {/* Nav links — always visible, hidden on mobile via CSS */}
-        <div style={{ display: "flex", alignItems: "center", gap: 28 }} className="nav-links-wrap">
-          {NAV_LINKS.map((l) => (
-            <a key={l.href} href={l.href}
-              style={{ color: "var(--silver2)", fontSize: 13, fontWeight: 500, textDecoration: "none", transition: "color .2s" }}
-              onMouseEnter={(e) => (e.currentTarget.style.color = "var(--white)")}
-              onMouseLeave={(e) => (e.currentTarget.style.color = "var(--silver2)")}>
-              {l.label}
-            </a>
-          ))}
+        <div className="nav-scroll-area">
+          <div className="nav-links-wrap">
+            {NAV_LINKS.map((l) => (
+              <a key={l.href} href={l.href} className="nav-link">
+                {l.label}
+              </a>
+            ))}
+          </div>
         </div>
 
-        <CtaButtons size="sm" />
+        <div className="nav-cta-desktop">
+          <CtaButtons size="sm" />
+        </div>
       </div>
-      <style>{`@media(max-width:768px){.nav-links-wrap{display:none!important}}`}</style>
     </nav>
   );
 }

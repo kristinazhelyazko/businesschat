@@ -25,8 +25,8 @@ const ICON_CLS: Record<string,string> = {
 
 export default function ModulesSection() {
   return (
-    <section id="modules" style={{ padding:"60px 0", background:"var(--bg2)" }}>
-      <div style={{ maxWidth:1200, margin:"0 auto", padding:"0 24px" }}>
+    <section id="modules" className="site-section" style={{ background:"var(--bg2)" }}>
+      <div className="site-container">
 
         {/* Step label header */}
         <div className="reveal" style={{ marginBottom:32 }}>
@@ -36,7 +36,7 @@ export default function ModulesSection() {
             </div>
             <div style={{ height:1, flex:1, background:"linear-gradient(90deg,rgba(57,255,140,.18),transparent)" }} />
           </div>
-          <div style={{ display:"flex", justifyContent:"space-between", alignItems:"flex-end", gap:20, flexWrap:"wrap" }}>
+          <div className="modules-header" style={{ display:"flex", justifyContent:"space-between", alignItems:"flex-end", gap:20, flexWrap:"wrap" }}>
             <div>
               <h2 style={{ fontSize:"clamp(22px,3vw,36px)", fontWeight:800, letterSpacing:"-.8px", color:"var(--white)", lineHeight:1.1, marginBottom:8 }}>
                 Добавьте функции под задачи бизнеса
@@ -45,7 +45,7 @@ export default function ModulesSection() {
                 Каждый модуль — отдельная опция. Берёте только то, что реально нужно прямо сейчас.
               </p>
             </div>
-            <CtaButtons size="md" align="flex-end" />
+            <CtaButtons size="md" align="flex-end" stack />
           </div>
         </div>
 

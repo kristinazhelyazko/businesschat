@@ -7,8 +7,8 @@ export default function FaqSection() {
   const [open, setOpen] = useState<number | null>(0);
 
   return (
-    <section id="faq" style={{ padding: "60px 0", background: "var(--bg2)" }}>
-      <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 24px" }}>
+    <section id="faq" className="site-section" style={{ background: "var(--bg2)" }}>
+      <div className="site-container">
         <div style={{ textAlign: "center", marginBottom: 40, display: "flex", flexDirection: "column", alignItems: "center", gap: 10 }} className="reveal">
           <div className="section-label">Вопросы</div>
           <h2 style={{ fontSize: "clamp(28px,4vw,44px)", fontWeight: 800, letterSpacing: "-1px", color: "var(--white)", lineHeight: 1.1 }}>
@@ -25,7 +25,7 @@ export default function FaqSection() {
             return (
               <div
                 key={i}
-                className="reveal"
+                className="faq-item reveal"
                 style={{
                   transitionDelay: `${i * 0.04}s`,
                   border: isOpen
@@ -54,7 +54,7 @@ export default function FaqSection() {
                   onClick={() => setOpen(isOpen ? null : i)}
                   style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 16, padding: "17px 20px", cursor: "pointer", userSelect: "none" }}
                 >
-                  <span style={{
+                  <span className="faq-q-text" style={{
                     fontSize: 14, fontWeight: 600,
                     color: isOpen ? "var(--neon)" : "var(--white)",
                     lineHeight: 1.4,

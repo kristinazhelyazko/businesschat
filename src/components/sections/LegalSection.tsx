@@ -2,9 +2,9 @@ import CtaButtons from "@/components/ui/CtaButtons";
 
 export default function LegalSection() {
   return (
-    <section id="legal" style={{ padding: "60px 0", position: "relative", overflow: "hidden" }}>
+    <section id="legal" className="site-section" style={{ position: "relative", overflow: "hidden" }}>
       <div style={{ position:"absolute", inset:0, pointerEvents:"none", background:"radial-gradient(ellipse 80% 50% at 50% 100%, rgba(57,255,140,0.04) 0%, transparent 70%)" }} />
-      <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 24px", position: "relative", zIndex: 1 }}>
+      <div className="site-container" style={{ position: "relative", zIndex: 1 }}>
 
         <div className="reveal">
           <div style={{

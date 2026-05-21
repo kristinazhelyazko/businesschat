@@ -56,8 +56,8 @@ const FLOW_STEPS = [
 
 export default function ProblemsSection() {
   return (
-    <section id="problems" style={{ padding: "60px 0", background: "var(--bg2)" }}>
-      <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 24px" }}>
+    <section id="problems" className="site-section" style={{ background: "var(--bg2)" }}>
+      <div className="site-container">
 
         {/* Header */}
         <div style={{ textAlign: "center", marginBottom: 40, display: "flex", flexDirection: "column", alignItems: "center", gap: 10 }} className="reveal">
@@ -140,7 +140,6 @@ export default function ProblemsSection() {
           .bridge-inner-top{flex-direction:column!important}
           .flow-grid{grid-template-columns:1fr 1fr!important}
         }
-        @media(max-width:480px){.flow-grid{grid-template-columns:1fr!important}}
       `}</style>
     </section>
   );

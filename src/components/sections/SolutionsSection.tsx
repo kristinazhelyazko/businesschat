@@ -35,8 +35,8 @@ function StepLabel({ num, title, sub }: StepLabelProps) {
 
 export default function SolutionsSection() {
   return (
-    <section id="solutions" style={{ padding:"60px 0" }}>
-      <div style={{ maxWidth:1200, margin:"0 auto", padding:"0 24px" }}>
+    <section id="solutions" className="site-section">
+      <div className="site-container">
 
         {/* ══ STEP 1 ══ */}
         <div className="reveal">

@@ -14,7 +14,7 @@ export default function Footer() {
     <>
       <footer style={{ borderTop:"1px solid var(--border)", padding:"32px 0", position:"relative" }}>
         <div style={{ position:"absolute", top:0, left:"15%", right:"15%", height:1, background:"linear-gradient(90deg,transparent,rgba(184,191,200,.07),transparent)" }} />
-        <div style={{ maxWidth:1200, margin:"0 auto", padding:"0 24px" }}>
+        <div className="site-container">
           <div style={{ display:"flex", alignItems:"center", justifyContent:"space-between", gap:16, flexWrap:"wrap" }}>
             <Link href="/" style={{ display:"flex", alignItems:"center", gap:10, textDecoration:"none" }}>
               <div style={{ width:32, height:32, background:"linear-gradient(135deg,#39FF8C,#00E5FF)", borderRadius:8, display:"flex", alignItems:"center", justifyContent:"center", boxShadow:"0 0 16px rgba(57,255,140,.2)" }}>
@@ -51,7 +51,7 @@ export default function Footer() {
         <div
           onClick={(e) => { if (e.target === e.currentTarget) setLegalOpen(false); }}
           style={{ position:"fixed", inset:0, zIndex:1000, display:"flex", alignItems:"center", justifyContent:"center", padding:"24px 16px", background:"rgba(4,6,10,0.8)", backdropFilter:"blur(12px)", WebkitBackdropFilter:"blur(12px)" }}>
-          <div style={{
+          <div className="legal-modal" style={{
             position:"relative", maxWidth:680, width:"100%", maxHeight:"80vh",
             background:"var(--bg3)", border:"1px solid rgba(184,191,200,.14)",
             borderRadius:24, overflow:"hidden",

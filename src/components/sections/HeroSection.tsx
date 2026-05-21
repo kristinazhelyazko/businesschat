@@ -5,7 +5,7 @@ import { IconOrderBox, IconLightning, IconTelegram, IconMonitor } from "@/compon
 
 export default function HeroSection() {
   return (
-    <section style={{ minHeight: "100vh", display: "flex", alignItems: "center", position: "relative", overflow: "hidden", padding: "80px 0 60px" }}>
+    <section className="hero-section" style={{ minHeight: "100vh", display: "flex", alignItems: "center", position: "relative", overflow: "hidden", padding: "80px 0 60px" }}>
       {/* Background */}
       <div style={{ position: "absolute", inset: 0 }}>
         <div style={{ position: "absolute", inset: 0, backgroundImage: "linear-gradient(rgba(255,255,255,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.02) 1px,transparent 1px)", backgroundSize: "60px 60px" }} />
@@ -30,13 +30,13 @@ export default function HeroSection() {
         ))}
       </div>
 
-      <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 24px", position: "relative", zIndex: 1, width: "100%" }}>
+      <div className="site-container" style={{ position: "relative", zIndex: 1 }}>
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 60, alignItems: "center" }} className="hero-grid">
           {/* Left */}
           <div style={{ display: "flex", flexDirection: "column", gap: 24 }} className="reveal">
             <div style={{ display:"inline-flex", alignItems:"center", gap:8, padding:"6px 14px", background:"rgba(57,255,140,.08)", border:"1px solid rgba(57,255,140,.2)", borderRadius:40, width:"fit-content" }}>
               <span style={{ width:6, height:6, borderRadius:"50%", background:"var(--neon)", animation:"pulseDot 2s ease-in-out infinite", boxShadow:"0 0 6px #39FF8C", display:"block" }} />
-              <span style={{ fontSize:11, fontWeight:600, color:"var(--neon)", letterSpacing:".08em", textTransform:"uppercase" }}>Telegram · ВКонтакте · Под ключ</span>
+              <span className="hero-badge-text" style={{ fontSize:11, fontWeight:600, color:"var(--neon)", letterSpacing:".08em", textTransform:"uppercase" }}>Telegram · ВКонтакте · Под ключ</span>
             </div>
 
             <h1 style={{ fontSize:"clamp(32px,4.5vw,56px)", fontWeight:800, lineHeight:1.05, letterSpacing:"-1.5px", color:"var(--white)" }}>
@@ -48,9 +48,9 @@ export default function HeroSection() {
               Интернет-магазин, управление заказами и боты в Telegram и ВКонтакте. Через месяц у вас будет готовое решение — персонально под ваш бизнес.
             </p>
 
-            <CtaButtons size="md" />
+            <CtaButtons size="md" stack />
 
-            <div style={{ display:"flex", gap:28, paddingTop:8, flexWrap:"wrap" }}>
+            <div className="hero-stats" style={{ display:"flex", gap:28, paddingTop:8, flexWrap:"wrap" }}>
               {HERO_STATS.map((s) => (
                 <div key={s.label} style={{ display:"flex", flexDirection:"column", gap:2 }}>
                   <div style={{ fontSize:28, fontWeight:800, color:"var(--white)", letterSpacing:"-1px", fontFamily:"var(--font-mono,'JetBrains Mono',monospace)" }}>
@@ -65,11 +65,11 @@ export default function HeroSection() {
           {/* Right — Dashboard preview */}
           <div style={{ position:"relative", transitionDelay:".2s" }} className="reveal">
             {/* Floating badges */}
-            <div style={{ position:"absolute", top:-20, left:-30, animation:"fbFloat 5s ease-in-out infinite", background:"rgba(10,12,20,.92)", backdropFilter:"blur(16px)", border:"1px solid rgba(184,191,200,.16)", borderRadius:12, padding:"10px 14px", boxShadow:"0 16px 40px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.06)", display:"flex", alignItems:"center", gap:8, zIndex:10 }}>
+            <div className="hero-float-badge" style={{ position:"absolute", top:-20, left:-30, animation:"fbFloat 5s ease-in-out infinite", background:"rgba(10,12,20,.92)", backdropFilter:"blur(16px)", border:"1px solid rgba(184,191,200,.16)", borderRadius:12, padding:"10px 14px", boxShadow:"0 16px 40px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.06)", display:"flex", alignItems:"center", gap:8, zIndex:10 }}>
               <IconOrderBox size={18} />
               <div><b style={{ fontSize:12, color:"var(--white)", display:"block" }}>+47 заказов сегодня</b><small style={{ fontSize:10, color:"var(--silver3)" }}>Telegram магазин</small></div>
             </div>
-            <div style={{ position:"absolute", bottom:-16, right:-20, animation:"fbFloat 5s ease-in-out infinite", animationDelay:"-2.5s", background:"rgba(10,12,20,.92)", backdropFilter:"blur(16px)", border:"1px solid rgba(184,191,200,.16)", borderRadius:12, padding:"10px 14px", boxShadow:"0 16px 40px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.06)", display:"flex", alignItems:"center", gap:8, zIndex:10 }}>
+            <div className="hero-float-badge" style={{ position:"absolute", bottom:-16, right:-20, animation:"fbFloat 5s ease-in-out infinite", animationDelay:"-2.5s", background:"rgba(10,12,20,.92)", backdropFilter:"blur(16px)", border:"1px solid rgba(184,191,200,.16)", borderRadius:12, padding:"10px 14px", boxShadow:"0 16px 40px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.06)", display:"flex", alignItems:"center", gap:8, zIndex:10 }}>
               <IconLightning size={18} />
               <div><b style={{ fontSize:12, color:"var(--white)", display:"block" }}>Конверсия 18.4%</b><small style={{ fontSize:10, color:"var(--silver3)" }}>vs 3.2% у сайта</small></div>
             </div>
@@ -80,7 +80,8 @@ export default function HeroSection() {
       </div>
 
       <style>{`
-        @media(max-width:1024px){ .hero-grid { grid-template-columns: 1fr !important; } .hero-card-hide { display: none !important; } }
+        @media(max-width:1024px){ .hero-grid { grid-template-columns: 1fr !important; gap: 32px !important; } }
+        @media(max-width:768px){ .hero-grid { gap: 24px !important; } }
       `}</style>
     </section>
   );
@@ -140,7 +141,7 @@ function DashboardCard() {
         { icon:<IconTelegram size={14}/>, iconBg:"rgba(57,255,140,.1)", name:"Заказ #4821 — Букет пионов «Нежность»", meta:"2 мин. назад · ₽ 4 800", statusLabel:"Новый", statusStyle:{ background:"rgba(57,255,140,.12)", color:"var(--neon)" } },
         { icon:<IconMonitor size={14}/>, iconBg:"rgba(0,229,255,.1)", name:"Заказ #4820 — Торт «Малина-фисташка»", meta:"11 мин. назад · ₽ 3 200", statusLabel:"Выполнен", statusStyle:{ background:"rgba(255,255,255,.06)", color:"var(--silver2)" } },
       ].map((o, i) => (
-        <div key={i} style={{ display:"flex", alignItems:"center", gap:10, padding:"10px 12px", background:"rgba(255,255,255,.03)", border:"1px solid var(--border)", borderRadius:10 }}>
+        <div key={i} className="dashboard-order-row" style={{ display:"flex", alignItems:"center", gap:10, padding:"10px 12px", background:"rgba(255,255,255,.03)", border:"1px solid var(--border)", borderRadius:10 }}>
           <div style={{ width:28, height:28, borderRadius:8, background:o.iconBg, display:"flex", alignItems:"center", justifyContent:"center", flexShrink:0 }}>{o.icon}</div>
           <div style={{ flex:1 }}>
             <div style={{ fontSize:11, fontWeight:600, color:"var(--white)" }}>{o.name}</div>

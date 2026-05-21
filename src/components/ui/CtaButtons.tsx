@@ -175,17 +175,21 @@ export default function CtaButtons({
     textAlign: "center",
   };
 
+  const rowClass = [
+    "cta-buttons-row",
+    stack || isCard ? "cta-buttons-stretch" : "",
+    size === "sm" ? "cta-buttons-keep-row" : "",
+  ].filter(Boolean).join(" ");
+
   return (
     <>
-    <div style={{ display: "flex", flexDirection: "column", alignItems: align, gap: showContact ? 12 : 0, width: isCard || stack ? "100%" : undefined }}>
+    <div className="cta-buttons-root" style={{ display: "flex", flexDirection: "column", alignItems: align, gap: showContact ? 12 : 0, width: isCard || stack ? "100%" : undefined }}>
       <div
+        className={rowClass}
         style={{
-          display: "flex",
           flexDirection: stack || isCard ? "column" : "row",
-          alignItems: stack || isCard ? "stretch" : "center",
           justifyContent: align === "center" ? "center" : align === "flex-end" ? "flex-end" : "flex-start",
           gap: s.gap,
-          flexWrap: "wrap",
           width: isCard ? "100%" : undefined,
         }}
       >
@@ -211,7 +215,8 @@ export default function CtaButtons({
           onMouseEnter={(e) => applyVkHover(e.currentTarget, true)}
           onMouseLeave={(e) => applyVkHover(e.currentTarget, false)}
         >
-          Если удобно в ВКонтакте
+          <span className="cta-vk-long">Если удобно в ВКонтакте</span>
+          <span className="cta-vk-short">Удобнее в ВК</span>
         </a>
       </div>
       {showContact && (
@@ -244,6 +249,7 @@ export default function CtaButtons({
       <div
         role="status"
         aria-live="polite"
+        className="copy-toast"
         style={{
           position: "fixed",
           bottom: 28,
