@@ -1,6 +1,6 @@
-"use client";
-import { SOLUTIONS, PLATFORMS } from "@/data/content";
-import CtaButtons from "@/components/ui/CtaButtons";
+import { SOLUTIONS, PLATFORMS, GUARANTEE } from "@/data/content";
+import ContactCtaButton from "@/components/contact/ContactCtaButton";
+
 function ShopIcon()  { return <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z" stroke="#39FF8C" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/><path d="M3 6h18M16 10a4 4 0 01-8 0" stroke="#39FF8C" strokeWidth="1.5" strokeLinecap="round"/></svg>; }
 function OrdersIcon(){ return <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" stroke="#00E5FF" strokeWidth="1.5" strokeLinecap="round"/><path d="M9 12h6M9 16h4" stroke="#00E5FF" strokeWidth="1.5" strokeLinecap="round"/></svg>; }
 function FullIcon()  { return <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6L12 2z" stroke="#A855F7" strokeWidth="1.5" strokeLinejoin="round"/></svg>; }
@@ -8,26 +8,25 @@ function TgIcon()    { return <svg width="19" height="19" viewBox="0 0 24 24" fi
 function VkIcon()    { return <svg width="19" height="19" viewBox="0 0 24 24" fill="none"><rect x="2" y="3" width="20" height="14" rx="2" stroke="#00E5FF" strokeWidth="1.5"/><path d="M8 21h8M12 17v4" stroke="#00E5FF" strokeWidth="1.5" strokeLinecap="round"/></svg>; }
 function MultiIcon() { return <svg width="19" height="19" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#A855F7" strokeWidth="1.5"/><path d="M8 12h8M12 8v8" stroke="#A855F7" strokeWidth="1.5" strokeLinecap="round"/></svg>; }
 
-const SOL_ICONS: Record<string, React.ReactNode> = { shop:<ShopIcon/>, orders:<OrdersIcon/>, full:<FullIcon/> };
-const PLAT_ICONS: Record<string, React.ReactNode> = { telegram:<TgIcon/>, vk:<VkIcon/>, multi:<MultiIcon/> };
-const ICON_CLS: Record<string, string> = {
-  shop:"icon-neon", orders:"icon-cyan", full:"icon-purple",
-  telegram:"icon-neon", vk:"icon-cyan", multi:"icon-purple",
+const SOL_ICONS: Record<string,React.ReactNode> = { shop:<ShopIcon/>, orders:<OrdersIcon/>, full:<FullIcon/> };
+const PLAT_ICONS: Record<string,React.ReactNode> = { telegram:<TgIcon/>, vk:<VkIcon/>, multi:<MultiIcon/> };
+const ICON_CLS: Record<string,string> = { shop:"icon-neon", orders:"icon-cyan", full:"icon-purple", telegram:"icon-neon", vk:"icon-cyan", multi:"icon-purple" };
+const SOL_CTA: Record<string,React.CSSProperties> = {
+  shop:   { background:"linear-gradient(135deg,#39FF8C,#22dba0)", color:"#080A0F", boxShadow:"0 4px 20px rgba(57,255,140,.28)" },
+  orders: { background:"linear-gradient(135deg,#00E5FF,#0099cc)", color:"#080A0F", boxShadow:"0 4px 20px rgba(0,229,255,.22)" },
+  full:   { background:"linear-gradient(135deg,#A855F7,#00E5FF)", color:"#fff",    boxShadow:"0 4px 20px rgba(168,85,247,.3)"  },
 };
 
-interface StepLabelProps { num: string; title: string; sub: string }
-function StepLabel({ num, title, sub }: StepLabelProps) {
+function StepLabel({ num, title, sub }: { num:string; title:string; sub:string }) {
   return (
-    <div style={{ marginBottom: 32 }}>
+    <div style={{ marginBottom:28 }}>
       <div style={{ display:"flex", alignItems:"center", gap:12, marginBottom:10 }}>
         <div style={{ display:"inline-flex", alignItems:"center", gap:6, padding:"4px 12px", background:"rgba(57,255,140,.08)", border:"1px solid rgba(57,255,140,.2)", borderRadius:40 }}>
           <span style={{ fontSize:10, fontWeight:700, fontFamily:"var(--font-mono,'JetBrains Mono',monospace)", color:"var(--neon)", letterSpacing:".12em" }}>ШАГ {num}</span>
         </div>
         <div style={{ height:1, flex:1, background:"linear-gradient(90deg,rgba(57,255,140,.18),transparent)" }} />
       </div>
-      <h2 style={{ fontSize:"clamp(22px,3vw,36px)", fontWeight:800, letterSpacing:"-.8px", color:"var(--white)", lineHeight:1.1, marginBottom:8 }}>
-        {title}
-      </h2>
+      <h2 style={{ fontSize:"clamp(22px,3vw,36px)", fontWeight:800, letterSpacing:"-.8px", color:"var(--white)", lineHeight:1.1, marginBottom:8 }}>{title}</h2>
       <p style={{ fontSize:14, color:"var(--silver2)", lineHeight:1.65 }}>{sub}</p>
     </div>
   );
@@ -35,44 +34,32 @@ function StepLabel({ num, title, sub }: StepLabelProps) {
 
 export default function SolutionsSection() {
   return (
-    <section id="solutions" className="site-section">
-      <div className="site-container">
+    <section id="solutions" style={{ padding:"60px 0" }}>
+      <div style={{ maxWidth:1200, margin:"0 auto", padding:"0 24px" }}>
 
-        {/* ══ STEP 1 ══ */}
+        {/* ── STEP 1 ── */}
         <div className="reveal">
-          <StepLabel
-            num="1"
-            title="Выберите, что нужно вашему бизнесу"
-            sub="Три готовых решения. Берёте то, что подходит сейчас — при необходимости расширите позже."
-          />
+          <StepLabel num="1" title="Выберите, что нужно вашему бизнесу" sub="Три готовых решения. Берёте то, что подходит сейчас — при необходимости расширите позже." />
         </div>
 
-        <div style={{ display:"grid", gridTemplateColumns:"repeat(3,1fr)", gap:16, marginBottom:60 }} className="sol-grid">
-          {SOLUTIONS.map((s, i) => (
-            <div key={s.id} className="glass-card reveal"
-              style={{ padding:26, display:"flex", flexDirection:"column", gap:16, position:"relative", overflow:"hidden",
-                transitionDelay:`${i*0.09}s`,
-                ...(s.highlight ? { border:"1px solid rgba(168,85,247,.28)" } : {}) }}>
-              {s.highlight && <div style={{ position:"absolute", inset:0, background:"linear-gradient(135deg,rgba(168,85,247,.05),rgba(0,229,255,.03))", pointerEvents:"none" }} />}
-              {s.badge && (
-                <div style={{ position:"absolute", top:-1, left:"50%", transform:"translateX(-50%)", background:"linear-gradient(90deg,#A855F7,#00E5FF)", color:"#fff", fontSize:9, fontWeight:800, padding:"3px 14px", borderRadius:"0 0 9px 9px", letterSpacing:".08em", textTransform:"uppercase" }}>{s.badge}</div>
-              )}
+        <div style={{ display:"grid", gridTemplateColumns:"repeat(3,1fr)", gap:16, marginBottom:40 }} className="sol-grid">
+          {SOLUTIONS.map((s,i)=>(
+            <div key={s.id} className="glass-card reveal" style={{ padding:26, display:"flex", flexDirection:"column", gap:16, position:"relative", overflow:"hidden", transitionDelay:`${i*0.09}s`, ...(s.highlight?{border:"1px solid rgba(168,85,247,.28)"}:{}) }}>
+              {s.highlight&&<div style={{ position:"absolute", inset:0, background:"linear-gradient(135deg,rgba(168,85,247,.05),rgba(0,229,255,.03))", pointerEvents:"none" }} />}
+              {s.badge&&<div style={{ position:"absolute", top:-1, left:"50%", transform:"translateX(-50%)", background:"linear-gradient(90deg,#A855F7,#00E5FF)", color:"#fff", fontSize:9, fontWeight:800, padding:"3px 14px", borderRadius:"0 0 9px 9px", letterSpacing:".08em", textTransform:"uppercase" }}>{s.badge}</div>}
 
-              {/* Icon row */}
-              <div style={{ display:"flex", alignItems:"center", gap:10, paddingTop: s.badge ? 8 : 0 }}>
+              <div style={{ display:"flex", alignItems:"center", gap:10, paddingTop:s.badge?8:0 }}>
                 <div className={`icon-wrap ${ICON_CLS[s.id]}`} style={{ width:44, height:44, borderRadius:13 }}>{SOL_ICONS[s.id]}</div>
                 <span style={{ fontSize:10, fontWeight:700, color:"var(--silver3)", letterSpacing:".09em", textTransform:"uppercase" }}>{s.tag}</span>
               </div>
 
-              {/* Title + desc */}
               <div>
-                <div style={{ fontSize:19, fontWeight:800, color:"var(--white)", letterSpacing:"-.4px", marginBottom:7 }}>{s.title}</div>
+                <div style={{ fontSize:18, fontWeight:800, color:"var(--white)", letterSpacing:"-.4px", marginBottom:7, lineHeight:1.25 }}>{s.title}</div>
                 <p style={{ fontSize:13, color:"var(--silver2)", lineHeight:1.65 }}>{s.desc}</p>
               </div>
 
-              {/* Includes list */}
               <div style={{ display:"flex", flexDirection:"column", gap:7, flex:1 }}>
-                {s.includes.map((item, ii) => (
+                {s.includes.map((item,ii)=>(
                   <div key={ii} style={{ display:"flex", alignItems:"flex-start", gap:8, fontSize:12 }}>
                     <span style={{ color:"var(--neon)", flexShrink:0, marginTop:1 }}>✓</span>
                     <span style={{ color:"var(--silver)" }}>{item}</span>
@@ -80,45 +67,69 @@ export default function SolutionsSection() {
                 ))}
               </div>
 
-              {/* Metrics */}
+              {/* Payment note */}
+              {s.paymentNote && (
+                <div style={{ fontSize:11, color:"var(--silver3)", padding:"7px 11px", background:"rgba(255,255,255,.03)", borderRadius:9, border:"1px solid var(--border)", lineHeight:1.55 }}>
+                  ℹ {s.paymentNote}
+                </div>
+              )}
+
               <div style={{ padding:"12px 14px", background:"rgba(255,255,255,.035)", borderRadius:11, border:"1px solid var(--border)", display:"flex", flexDirection:"column", gap:8 }}>
-                {s.metrics.map((m, mi) => (
-                  <div key={mi} style={{ display:"flex", justifyContent:"space-between", alignItems:"center", fontSize:11,
-                    paddingBottom: mi < s.metrics.length-1 ? 8 : 0,
-                    borderBottom: mi < s.metrics.length-1 ? "1px solid var(--border)" : "none" }}>
+                {s.metrics.map((m,mi)=>(
+                  <div key={mi} style={{ display:"flex", justifyContent:"space-between", alignItems:"center", fontSize:11, paddingBottom:mi<s.metrics.length-1?8:0, borderBottom:mi<s.metrics.length-1?"1px solid var(--border)":"none" }}>
                     <span style={{ color:"var(--silver3)" }}>{m.label}</span>
-                    <span style={{ color:"var(--neon)", fontWeight:700, fontFamily:"var(--font-mono,'JetBrains Mono',monospace)" }}>{m.value}</span>
+                    <span style={{ color:"var(--neon)", fontWeight:700, fontFamily:"var(--font-mono,'JetBrains Mono',monospace)", textAlign:"right", maxWidth:120 }}>{m.value}</span>
                   </div>
                 ))}
               </div>
 
-              <CtaButtons
-                size="card"
-                primaryVariant="outline"
-                solutionId={s.id as "shop" | "orders" | "full"}
-                stack
+              <ContactCtaButton
+                showIcon={false}
+                className=""
+                style={{ display:"block", width:"100%", padding:"11px", borderRadius:40, fontSize:13, fontWeight:700, textAlign:"center", border:"none", cursor:"pointer", transition:"all .25s", ...SOL_CTA[s.id] }}
               />
             </div>
           ))}
         </div>
 
-        {/* ══ STEP 2 ══ */}
-        <div className="reveal">
-          <StepLabel
-            num="2"
-            title="Выберите, где живут ваши клиенты"
-            sub="Telegram, ВКонтакте или сразу оба — система работает на выбранной платформе."
-          />
+        {/* ── GUARANTEE BLOCK — вынесена на видное место ── */}
+        <div className="reveal" style={{ marginBottom:52 }}>
+          <div style={{ padding:"28px 32px", borderRadius:20, background:"linear-gradient(135deg,rgba(57,255,140,.07),rgba(0,229,255,.04))", border:"1px solid rgba(57,255,140,.22)", position:"relative", overflow:"hidden", display:"grid", gridTemplateColumns:"1fr auto", gap:24, alignItems:"center" }} className="guarantee-grid">
+            <div style={{ position:"absolute", top:-1, left:"8%", right:"8%", height:1, background:"linear-gradient(90deg,transparent,rgba(57,255,140,.45),transparent)" }} />
+            <div>
+              <div style={{ display:"inline-flex", alignItems:"center", gap:7, padding:"3px 12px", background:"rgba(57,255,140,.1)", border:"1px solid rgba(57,255,140,.2)", borderRadius:40, marginBottom:10 }}>
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="#39FF8C" strokeWidth="1.5" strokeLinecap="round"/><path d="M9 12l2 2 4-4" stroke="#39FF8C" strokeWidth="1.5" strokeLinecap="round"/></svg>
+                <span style={{ fontSize:10, fontWeight:700, color:"var(--neon)", letterSpacing:".1em", textTransform:"uppercase" }}>Гарантия</span>
+              </div>
+              <h3 style={{ fontSize:"clamp(16px,2vw,22px)", fontWeight:800, color:"var(--white)", letterSpacing:"-.4px", marginBottom:10, lineHeight:1.2 }}>{GUARANTEE.title}</h3>
+              <p style={{ fontSize:13, color:"var(--silver2)", lineHeight:1.7, marginBottom:12, maxWidth:560 }}>{GUARANTEE.subtitle}</p>
+              <div style={{ display:"flex", gap:10, flexWrap:"wrap" }}>
+                {GUARANTEE.points.map(p=>(
+                  <div key={p} style={{ display:"flex", alignItems:"center", gap:5, padding:"5px 12px", borderRadius:40, border:"1px solid rgba(57,255,140,.2)", background:"rgba(57,255,140,.06)", fontSize:11, fontWeight:600, color:"var(--neon)" }}>
+                    <svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#39FF8C" strokeWidth="1.5" strokeLinecap="round"/></svg>
+                    {p}
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div style={{ flexShrink:0 }} className="guarantee-cta">
+              <ContactCtaButton
+                className=""
+                style={{ display:"inline-flex", alignItems:"center", gap:8, padding:"12px 22px", background:"var(--neon)", color:"var(--bg)", fontSize:13, fontWeight:700, borderRadius:40, border:"none", cursor:"pointer", boxShadow:"0 0 20px rgba(57,255,140,.2)", whiteSpace:"nowrap" }}
+              />
+            </div>
+          </div>
         </div>
 
-        <div style={{ display:"grid", gridTemplateColumns:"repeat(3,1fr)", gap:14, marginBottom:0 }} className="plat-grid reveal">
-          {PLATFORMS.map((p) => (
-            <div key={p.id} className="glass-card"
-              style={{ padding:20, display:"flex", flexDirection:"column", gap:12,
-                ...(p.featured ? { border:"1px solid rgba(168,85,247,.28)", background:"linear-gradient(160deg,rgba(168,85,247,.06),rgba(0,229,255,.04),var(--glass))" } : {}) }}>
-              {p.badge && (
-                <div style={{ position:"absolute", top:12, right:12, fontSize:9, fontWeight:700, padding:"2px 9px", borderRadius:20, background:"rgba(168,85,247,.15)", color:"#C084FC", border:"1px solid rgba(168,85,247,.28)", letterSpacing:".06em", textTransform:"uppercase" }}>{p.badge}</div>
-              )}
+        {/* ── STEP 2 ── */}
+        <div className="reveal">
+          <StepLabel num="2" title="Выберите, где живут ваши клиенты" sub="Telegram, ВКонтакте или сразу оба — система запускается на выбранной платформе." />
+        </div>
+
+        <div style={{ display:"grid", gridTemplateColumns:"repeat(3,1fr)", gap:14 }} className="plat-grid reveal">
+          {PLATFORMS.map((p)=>(
+            <div key={p.id} className="glass-card" style={{ padding:20, display:"flex", flexDirection:"column", gap:12, ...(p.featured?{border:"1px solid rgba(168,85,247,.28)",background:"linear-gradient(160deg,rgba(168,85,247,.06),rgba(0,229,255,.04),var(--glass))"}:{}) }}>
+              {p.badge&&<div style={{ position:"absolute", top:12, right:12, fontSize:9, fontWeight:700, padding:"2px 9px", borderRadius:20, background:"rgba(168,85,247,.15)", color:"#C084FC", border:"1px solid rgba(168,85,247,.28)", letterSpacing:".06em", textTransform:"uppercase" }}>{p.badge}</div>}
               <div style={{ display:"flex", alignItems:"center", gap:10 }}>
                 <div className={`icon-wrap ${ICON_CLS[p.id]}`} style={{ width:38, height:38, borderRadius:11 }}>{PLAT_ICONS[p.icon]}</div>
                 <div>
@@ -127,16 +138,14 @@ export default function SolutionsSection() {
                 </div>
               </div>
               <div style={{ display:"flex", flexDirection:"column", gap:6 }}>
-                {p.items.map((item, ii) => (
+                {p.items.map((item,ii)=>(
                   <div key={ii} style={{ display:"flex", alignItems:"flex-start", gap:7, fontSize:12, color:item.hi?"var(--white)":"var(--silver2)", fontWeight:item.hi?500:400 }}>
                     <span style={{ flexShrink:0, color:item.hi?"var(--neon)":"var(--silver3)" }}>{item.hi?"✓":"—"}</span>
                     {item.text}
                   </div>
                 ))}
               </div>
-              {p.note && (
-                <div style={{ fontSize:10, color:"var(--silver3)", padding:"5px 9px", background:"rgba(255,255,255,.03)", borderRadius:7, border:"1px solid var(--border)", lineHeight:1.5 }}>ℹ {p.note}</div>
-              )}
+              {p.note&&<div style={{ fontSize:10, color:"var(--silver3)", padding:"5px 9px", background:"rgba(255,255,255,.03)", borderRadius:7, border:"1px solid var(--border)", lineHeight:1.5 }}>ℹ {p.note}</div>}
             </div>
           ))}
         </div>
@@ -145,11 +154,7 @@ export default function SolutionsSection() {
       <style>{`
         @media(max-width:1024px){.sol-grid,.plat-grid{grid-template-columns:repeat(2,1fr)!important}}
         @media(max-width:640px){.sol-grid,.plat-grid{grid-template-columns:1fr!important}}
-        .sol-cta-btn:hover{
-          background: linear-gradient(135deg, var(--neon), var(--neon2)) !important;
-          transform: translateY(-2px);
-          box-shadow: 0 8px 28px rgba(57,255,140,.35) !important;
-        }
+        @media(max-width:900px){.guarantee-grid{grid-template-columns:1fr!important}.guarantee-cta{display:none}}
       `}</style>
     </section>
   );

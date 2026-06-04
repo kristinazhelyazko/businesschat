@@ -1,6 +1,7 @@
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import RevealInit from "@/components/layout/RevealInit";
+import { ContactModalProvider } from "@/components/contact/ContactModalProvider";
 import HeroSection from "@/components/sections/HeroSection";
 import ProblemsSection from "@/components/sections/ProblemsSection";
 import SolutionsSection from "@/components/sections/SolutionsSection";
@@ -12,10 +13,10 @@ import CtaSection from "@/components/sections/CtaSection";
 
 export default function Home() {
   return (
-    <>
+    <ContactModalProvider>
       <RevealInit />
       <Navbar />
-      <main style={{ position: "relative", zIndex: 1 }}>
+      <main style={{ position:"relative", zIndex:1 }}>
         <HeroSection />
         <ProblemsSection />
         <SolutionsSection />
@@ -26,6 +27,6 @@ export default function Home() {
         <CtaSection />
       </main>
       <Footer />
-    </>
+    </ContactModalProvider>
   );
 }

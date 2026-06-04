@@ -6,6 +6,15 @@ export function IconTelegram({ size = 22 }: { size?: number }) {
   );
 }
 
+/** Иконка «самолётик» Telegram для CTA-кнопок на тёмном/неоновом фоне */
+export function IconTelegramSend({ size = 18, stroke = "#080A0F" }: { size?: number; stroke?: string }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" aria-hidden>
+      <path d="M22 2L11 13M22 2L15 22l-4-9-9-4 20-7z" stroke={stroke} strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
+    </svg>
+  );
+}
+
 export function IconVK({ size = 22 }: { size?: number }) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none">

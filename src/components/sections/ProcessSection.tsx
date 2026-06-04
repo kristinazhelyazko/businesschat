@@ -1,4 +1,4 @@
-import CtaButtons from "@/components/ui/CtaButtons";
+import ContactCtaButton from "@/components/contact/ContactCtaButton";
 
 // SVG icons in site style — replacing emojis
 function IconDemo() {
@@ -69,8 +69,8 @@ const DEMO_FEATURES = [
 
 export default function ProcessSection() {
   return (
-    <section id="process" className="site-section">
-      <div className="site-container">
+    <section id="process" style={{ padding: "60px 0" }}>
+      <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 24px" }}>
         <div
           style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 24 }}
           className="reveal start-grid"
@@ -86,13 +86,15 @@ export default function ProcessSection() {
                 </em>
               </h2>
               <p style={{ fontSize: 14, color: "var(--silver2)", lineHeight: 1.75, marginBottom: 8 }}>
-                Покажем систему в работе, разберём ваши задачи и предложим конкретное решение — прямо на встрече.
+                Мы проводим онлайн-встречу: показываем живую систему, разбираем ваши задачи и вместе выбираем решение. Вы видите реальный продукт ещё до того, как приняли решение о покупке.
               </p>
               <p style={{ fontSize: 14, color: "var(--silver2)", lineHeight: 1.75 }}>
-                Без обязательств. Если останутся вопросы — созвонимся ещё раз.
+                Если после встречи остались вопросы — проводим повторный созвон. Никакого давления и никаких обязательств.
               </p>
             </div>
-            <CtaButtons size="lg" showContact stack />
+            <ContactCtaButton
+              style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", gap: 10, padding: "15px 32px", background: "var(--neon)", color: "var(--bg)", fontSize: 15, fontWeight: 800, borderRadius: 40, border: "none", cursor: "pointer", boxShadow: "0 0 32px rgba(57,255,140,.28)", letterSpacing: "-.2px", width: "fit-content" }}
+            />
           </div>
 
           {/* ── Right: feature cards with SVG icons ── */}

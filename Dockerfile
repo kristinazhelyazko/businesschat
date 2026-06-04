@@ -10,7 +10,6 @@ FROM base AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
-# Для Docker-сборки в next.config.ts нужен output: "standalone"
 RUN npm run build
 
 FROM base AS runner

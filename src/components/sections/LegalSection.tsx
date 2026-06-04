@@ -1,10 +1,10 @@
-import CtaButtons from "@/components/ui/CtaButtons";
+import ContactCtaButton from "@/components/contact/ContactCtaButton";
 
 export default function LegalSection() {
   return (
-    <section id="legal" className="site-section" style={{ position: "relative", overflow: "hidden" }}>
+    <section id="legal" style={{ padding: "60px 0", position: "relative", overflow: "hidden" }}>
       <div style={{ position:"absolute", inset:0, pointerEvents:"none", background:"radial-gradient(ellipse 80% 50% at 50% 100%, rgba(57,255,140,0.04) 0%, transparent 70%)" }} />
-      <div className="site-container" style={{ position: "relative", zIndex: 1 }}>
+      <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 24px", position: "relative", zIndex: 1 }}>
 
         <div className="reveal">
           <div style={{
@@ -36,7 +36,7 @@ export default function LegalSection() {
 
               {/* What's included as inline chips */}
               <div style={{ display:"flex", flexWrap:"wrap", gap:8 }}>
-                {["Публичная оферта", "Политика обработки персональных данных", "Согласие на обработку персональных данных", "Политика использования Cookie-файлов", "Проверка сайта на соответствие требованиям", "Оформление и привязка домена .ru"].map((item) => (
+                {["Публичная оферта","Политика ПД","Согласие на обработку ПД","Политика Cookie","Проверка сайта","Домен .ru"].map((item) => (
                   <div key={item} style={{ display:"flex", alignItems:"center", gap:5, padding:"5px 12px", borderRadius:40, border:"1px solid rgba(57,255,140,.18)", background:"rgba(57,255,140,.05)", fontSize:11, fontWeight:600, color:"var(--silver2)" }}>
                     <span style={{ color:"var(--neon)", fontSize:10 }}>✓</span> {item}
                   </div>
@@ -45,8 +45,12 @@ export default function LegalSection() {
             </div>
 
             {/* CTA */}
-            <div style={{ flexShrink:0, position:"relative", zIndex:1 }} className="legal-cta-col">
-              <CtaButtons size="md" align="flex-end" stack />
+            <div style={{ display:"flex", flexDirection:"column", gap:10, alignItems:"flex-end", flexShrink:0, position:"relative", zIndex:1 }} className="legal-cta-col">
+              <ContactCtaButton
+                className=""
+                style={{ display:"inline-flex", alignItems:"center", gap:8, padding:"11px 22px", background:"var(--neon)", color:"var(--bg)", fontSize:13, fontWeight:700, borderRadius:40, border:"none", cursor:"pointer", boxShadow:"0 0 20px rgba(57,255,140,.2)", whiteSpace:"nowrap" }}
+              />
+              <span style={{ fontSize:10, color:"var(--silver3)", textAlign:"center" }}>Включено в пакет «Про» и «Макс»</span>
             </div>
           </div>
         </div>
